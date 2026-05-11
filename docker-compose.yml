@@ -1,0 +1,24 @@
+services:
+  cinevision:
+    build: .
+    container_name: cinevision
+    restart: unless-stopped
+    # On expose le port 8501 uniquement sur 127.0.0.1 (boucle locale).
+    # Apache (sur l'hôte) fera le reverse proxy.
+    # Comme ça l'app n'est pas accessible directement en HTTP non-sécurisé.
+    ports:
+      - "127.0.0.1:8501:8501"
+    environment:
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+      - STREAMLIT_SERVER_HEADLESS=true
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

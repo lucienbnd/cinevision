@@ -1,0 +1,32 @@
+# Environment
+.env
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Données brutes : exclues (re-collectables depuis l'API TMDB)
+data/raw/
+
+# Modèles ML : INCLUS dans le repo (snapshot reproductible pour le déploiement)
+# data/processed/ : INCLUS dans le repo (idem)
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

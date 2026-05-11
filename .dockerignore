@@ -1,0 +1,28 @@
+# Exclure tout ce qui n'est pas nécessaire au runtime de l'image
+.git/
+.gitignore
+.github/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Données brutes (l'image ne contient que data/processed/movies_features.csv)
+data/raw/
+
+# Notebooks (pas besoin au runtime)
+notebooks/
+
+# Docs et fichiers locaux
+docs/
+*.md
+!README.md
+.env
+.env.example
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
