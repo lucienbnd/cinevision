@@ -103,11 +103,18 @@ with col2:
         "CL": "Chili", "CO": "Colombie", "PE": "Pérou",
     }
 
+    # Tri alphabétique par nom français (UX : plus facile à scanner pour l'utilisateur)
+    countries_sorted = sorted(
+        countries_list,
+        key=lambda c: country_names.get(c, c).lower(),
+    )
+
     selected_countries = st.multiselect(
         "🌍 Pays de production",
-        options=countries_list,
-        default=["US"] if "US" in countries_list else countries_list[:1],
+        options=countries_sorted,
+        default=[],
         format_func=lambda c: country_names.get(c, c),
+        placeholder="Sélectionne un ou plusieurs pays",
         help="Sélectionne 1 ou plusieurs pays. Plusieurs pays = co-production internationale.",
     )
     director_experience = st.slider("Nb de films précédents du réalisateur", 0, 30, 3)
