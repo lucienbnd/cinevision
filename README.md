@@ -27,7 +27,7 @@ CinéVision est une application de **data storytelling** qui analyse plus de **2
 
 ```bash
 # Cloner le repo
-git clone https://github.com/lucienbernand/cinevision.git
+git clone https://github.com/lucienbnd/cinevision.git
 cd cinevision
 
 # Environnement virtuel
