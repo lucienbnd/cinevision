@@ -80,16 +80,20 @@ with col1:
 
 with col2:
     is_franchise = st.checkbox("Film de franchise / suite", value=False)
-    # Mapping ISO 2-lettres → nom complet pour un affichage user-friendly
+    # Mapping ISO 2-lettres → nom complet (sans drapeaux Unicode qui ne s'affichent
+    # pas correctement sur Windows par défaut)
     country_names = {
-        "US": "🇺🇸 États-Unis", "GB": "🇬🇧 Royaume-Uni", "FR": "🇫🇷 France",
-        "DE": "🇩🇪 Allemagne", "CA": "🇨🇦 Canada", "JP": "🇯🇵 Japon",
-        "CN": "🇨🇳 Chine", "HK": "🇭🇰 Hong Kong", "AU": "🇦🇺 Australie",
-        "KR": "🇰🇷 Corée du Sud", "IN": "🇮🇳 Inde", "IT": "🇮🇹 Italie",
-        "ES": "🇪🇸 Espagne", "MX": "🇲🇽 Mexique", "RU": "🇷🇺 Russie",
-        "BR": "🇧🇷 Brésil", "BE": "🇧🇪 Belgique", "NL": "🇳🇱 Pays-Bas",
-        "IE": "🇮🇪 Irlande", "SE": "🇸🇪 Suède", "DK": "🇩🇰 Danemark",
-        "NZ": "🇳🇿 Nouvelle-Zélande",
+        "US": "États-Unis", "GB": "Royaume-Uni", "FR": "France",
+        "DE": "Allemagne", "CA": "Canada", "JP": "Japon",
+        "CN": "Chine", "HK": "Hong Kong", "AU": "Australie",
+        "KR": "Corée du Sud", "IN": "Inde", "IT": "Italie",
+        "ES": "Espagne", "MX": "Mexique", "RU": "Russie",
+        "BR": "Brésil", "BE": "Belgique", "NL": "Pays-Bas",
+        "IE": "Irlande", "SE": "Suède", "DK": "Danemark",
+        "NZ": "Nouvelle-Zélande", "CH": "Suisse", "AT": "Autriche",
+        "NO": "Norvège", "FI": "Finlande", "PL": "Pologne",
+        "AR": "Argentine", "ZA": "Afrique du Sud", "TR": "Turquie",
+        "TH": "Thaïlande", "PH": "Philippines", "ID": "Indonésie",
     }
 
     selected_countries = st.multiselect(
