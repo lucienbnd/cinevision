@@ -32,7 +32,14 @@ def load_movies() -> pd.DataFrame:
     """Charge le dataset des films (mis en cache par Streamlit)."""
     df = pd.read_csv(DATA_FILE)
     df["release_date"] = pd.to_datetime(df["release_date"])
-    for col in ["genres", "production_companies", "cast_top5", "cast_top5_popularity"]:
+    list_cols = [
+        "genres",
+        "production_companies",
+        "production_countries",
+        "cast_top5",
+        "cast_top5_popularity",
+    ]
+    for col in list_cols:
         df[col] = df[col].apply(
             lambda x: ast.literal_eval(x) if isinstance(x, str) and x.startswith("[") else []
         )
@@ -49,6 +56,49 @@ def get_top_directors(df: pd.DataFrame, min_films: int = 3) -> list[str]:
     """Retourne les réalisateurs avec au moins min_films films."""
     counts = df.groupby("director").size()
     return sorted(counts[counts >= min_films].index.tolist())
+
+
+@st.cache_data
+def get_top_actors(_df: pd.DataFrame, n: int = 250) -> pd.DataFrame:
+    """
+    Retourne les n acteurs les plus présents dans le dataset, avec leur popularité moyenne.
+
+    Le préfixe `_` sur `_df` indique à Streamlit de ne pas tenter de hasher le DataFrame
+    (les colonnes contiennent des listes non hashables).
+
+    Returns:
+        DataFrame avec colonnes : actor, avg_popularity, n_films
+    """
+    actor_data: dict[str, list[float]] = {}
+    for cast_list, pop_list in zip(_df["cast_top5"], _df["cast_top5_popularity"]):
+        if not isinstance(cast_list, list) or not isinstance(pop_list, list):
+            continue
+        for actor, pop in zip(cast_list, pop_list):
+            actor_data.setdefault(actor, []).append(float(pop))
+
+    rows = [
+        {
+            "actor": a,
+            "avg_popularity": sum(p) / len(p),
+            "n_films": len(p),
+        }
+        for a, p in actor_data.items()
+    ]
+    actors_df = pd.DataFrame(rows)
+    actors_df = actors_df.sort_values(
+        ["n_films", "avg_popularity"], ascending=[False, False]
+    )
+    return actors_df.head(n).reset_index(drop=True)
+
+
+@st.cache_data
+def get_top_countries(_df: pd.DataFrame, n: int = 20) -> list[str]:
+    """Retourne les n pays de production les plus fréquents."""
+    all_countries: list[str] = []
+    for countries in _df["production_countries"]:
+        if isinstance(countries, list):
+            all_countries.extend(countries)
+    return pd.Series(all_countries).value_counts().head(n).index.tolist()
 
 
 def budget_revenue_scatter(df: pd.DataFrame) -> go.Figure:
