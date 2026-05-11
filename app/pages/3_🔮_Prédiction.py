@@ -3,7 +3,6 @@
 import sys
 from pathlib import Path
 
-import pandas as pd
 import streamlit as st
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -11,7 +10,7 @@ APP_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(APP_DIR))
 
-from components.charts import COLORS, gauge_chart, load_movies
+from components.charts import gauge_chart, load_movies
 from src.model import load_classifier, load_regressor, predict_movie
 
 st.set_page_config(page_title="Prédiction", page_icon="🔮", layout="wide")
