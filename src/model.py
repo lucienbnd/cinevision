@@ -22,7 +22,6 @@ from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.metrics import (
     accuracy_score,
-    classification_report,
     confusion_matrix,
     f1_score,
     mean_absolute_error,
