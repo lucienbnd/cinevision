@@ -94,6 +94,13 @@ with col2:
         "NO": "Norvège", "FI": "Finlande", "PL": "Pologne",
         "AR": "Argentine", "ZA": "Afrique du Sud", "TR": "Turquie",
         "TH": "Thaïlande", "PH": "Philippines", "ID": "Indonésie",
+        # Pays supplémentaires présents dans le dataset TMDB
+        "BG": "Bulgarie", "CZ": "République Tchèque", "TW": "Taïwan",
+        "LU": "Luxembourg", "AE": "Émirats Arabes Unis", "IS": "Islande",
+        "PT": "Portugal", "GR": "Grèce", "HU": "Hongrie", "RO": "Roumanie",
+        "UA": "Ukraine", "IL": "Israël", "EG": "Égypte", "MA": "Maroc",
+        "NG": "Nigeria", "VN": "Vietnam", "MY": "Malaisie", "SG": "Singapour",
+        "CL": "Chili", "CO": "Colombie", "PE": "Pérou",
     }
 
     selected_countries = st.multiselect(
